@@ -23,10 +23,13 @@ void cipher(int rotNum) {
 }
 
 int main() {
-    int rotNumber = 12;
+    int rotNumber;
     printf("Enter the rot number: ");
     scanf("%d", &rotNumber);
     cipher(rotNumber);
+
+    //consume the newline char after the scanf
+    getchar();
 
     int messageSize = 10;
     char *message = (char *)malloc(messageSize * sizeof(char));
