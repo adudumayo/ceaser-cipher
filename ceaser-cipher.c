@@ -11,7 +11,7 @@
  *       Compiler:  gcc
  *
  *         Author:  Asimanye Dudumayo (VIMpirate), 
- *   Organization:  VIMpiracy
+ *   Organization:  https://adudumayo.github.io/ 
  *
  * =====================================================================================
  */
