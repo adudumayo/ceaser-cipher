@@ -20,13 +20,13 @@
 #include <stdbool.h>
 
 void cipher(int rotNum) {
-    
+    printf("Your rot number is %d\n", rotNum);
 }
 
 int main() {
     int rotNumber;
     printf("Enter the rot number: ");
     scanf("%d", &rotNumber);
-    printf("Your rot number is %d\n", rotNumber);
+    cipher(rotNumber);
     return 0;
 }
