@@ -19,7 +19,14 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+void cipher(int rotNum) {
+    
+}
+
 int main() {
-    printf("All Falls Down");
+    int rotNumber;
+    printf("Enter the rot number: ");
+    scanf("%d", &rotNumber);
+    printf("Your rot number is %d\n", rotNumber);
     return 0;
 }
