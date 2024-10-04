@@ -36,6 +36,29 @@ int main() {
         printf("malloc problem");
         return 1;
     }
+    
+    printf("Enter your message below: ");
+    int c;
+    int idx = 0;
 
+    while ((c = getchar()) != '\n' && c != EOF) {
+        if (idx == messageSize -1) {
+            messageSize *= 2;
+            message = (char *)realloc(message, messageSize * sizeof(char));
+            
+            if (message == NULL) {
+                printf("realloc problem");
+                return 1;
+            }
+        }
+        message[idx++] = (char)c;
+    }
+    message[idx] = '\n';
+
+    for (int i = 0; i < idx; i++) {
+        printf("%c ", message[i]);
+    }
+
+    return 0;
 
 }
