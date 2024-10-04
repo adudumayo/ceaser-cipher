@@ -25,7 +25,7 @@ void cipher(int rotNum) {
 int main() {
     int rotNumber = 12;
     printf("Enter the rot number: ");
-    //scanf("%d", &rotNumber);
+    scanf("%d", &rotNumber);
     cipher(rotNumber);
 
     int messageSize = 10;
@@ -58,9 +58,6 @@ int main() {
     for (int i = 0; i < idx; i++) {
         printf("%c", message[i]);
     }
-    
     free(message);
-
     return 0;
-
 }
