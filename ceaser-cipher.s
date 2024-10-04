@@ -36,6 +36,10 @@ cipher:
 	.string	"%d"
 .LC3:
 	.string	"malloc problem"
+.LC4:
+	.string	"Enter your message below: "
+.LC5:
+	.string	"realloc problem"
 	.text
 	.globl	main
 	.type	main, @function
@@ -52,15 +56,16 @@ main:
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	leaq	-20(%rbp), %rax
+	leaq	-32(%rbp), %rax
 	movq	%rax, %rsi
 	leaq	.LC2(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	__isoc99_scanf@PLT
-	movl	-20(%rbp), %eax
+	movl	-32(%rbp), %eax
 	movl	%eax, %edi
 	call	cipher
+	call	getchar@PLT
 	movl	$10, -4(%rbp)
 	movl	-4(%rbp), %eax
 	cltq
@@ -74,10 +79,80 @@ main:
 	movl	$0, %eax
 	call	printf@PLT
 	movl	$1, %eax
-	jmp	.L4
+	jmp	.L11
 .L3:
+	leaq	.LC4(%rip), %rax
+	movq	%rax, %rdi
+	call	puts@PLT
+	movl	$0, -20(%rbp)
+	jmp	.L5
+.L8:
+	movl	-4(%rbp), %eax
+	subl	$1, %eax
+	cmpl	%eax, -20(%rbp)
+	jne	.L6
+	sall	-4(%rbp)
+	movl	-4(%rbp), %eax
+	movslq	%eax, %rdx
+	movq	-16(%rbp), %rax
+	movq	%rdx, %rsi
+	movq	%rax, %rdi
+	call	realloc@PLT
+	movq	%rax, -16(%rbp)
+	cmpq	$0, -16(%rbp)
+	jne	.L6
+	leaq	.LC5(%rip), %rax
+	movq	%rax, %rdi
 	movl	$0, %eax
-.L4:
+	call	printf@PLT
+	movq	-16(%rbp), %rax
+	movq	%rax, %rdi
+	call	free@PLT
+	movl	$1, %eax
+	jmp	.L11
+.L6:
+	movl	-20(%rbp), %eax
+	leal	1(%rax), %edx
+	movl	%edx, -20(%rbp)
+	movslq	%eax, %rdx
+	movq	-16(%rbp), %rax
+	addq	%rdx, %rax
+	movl	-28(%rbp), %edx
+	movb	%dl, (%rax)
+.L5:
+	call	getchar@PLT
+	movl	%eax, -28(%rbp)
+	cmpl	$10, -28(%rbp)
+	je	.L7
+	cmpl	$-1, -28(%rbp)
+	jne	.L8
+.L7:
+	movl	-20(%rbp), %eax
+	movslq	%eax, %rdx
+	movq	-16(%rbp), %rax
+	addq	%rdx, %rax
+	movb	$0, (%rax)
+	movl	$0, -24(%rbp)
+	jmp	.L9
+.L10:
+	movl	-24(%rbp), %eax
+	movslq	%eax, %rdx
+	movq	-16(%rbp), %rax
+	addq	%rdx, %rax
+	movzbl	(%rax), %eax
+	movsbl	%al, %eax
+	movl	%eax, %edi
+	call	putchar@PLT
+	addl	$1, -24(%rbp)
+.L9:
+	movl	-24(%rbp), %eax
+	cmpl	-20(%rbp), %eax
+	jl	.L10
+	movq	-16(%rbp), %rax
+	movq	%rax, %rdi
+	call	free@PLT
+	movl	$0, %eax
+.L11:
 	leave
 	.cfi_def_cfa 7, 8
 	ret
