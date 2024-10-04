@@ -40,9 +40,7 @@ int main() {
     int c;
     int idx = 0;
 
-    printf("Just before the loop\n");
     while ((c = getchar()) != '\n' && c != EOF) {
-        printf("Looping\n");
         if (idx == messageSize -1) {
             messageSize *= 2;
             message = (char *)realloc(message, messageSize * sizeof(char));
@@ -56,10 +54,9 @@ int main() {
         message[idx++] = (char)c;
     }
     message[idx] = '\0';
-    printf("After the loop\n");
 
     for (int i = 0; i < idx; i++) {
-        printf("%c ", message[i]);
+        printf("%c", message[i]);
     }
     
     free(message);
