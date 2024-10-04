@@ -28,5 +28,14 @@ int main() {
     printf("Enter the rot number: ");
     scanf("%d", &rotNumber);
     cipher(rotNumber);
-    return 0;
+
+    int messageSize = 10;
+    char *message = (char *)malloc(messageSize * sizeof(char));
+
+    if (message == NULL) {
+        printf("malloc problem");
+        return 1;
+    }
+
+
 }
